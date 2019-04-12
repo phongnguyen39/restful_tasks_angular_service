@@ -25,9 +25,8 @@ var path = require("path");
 // THIS IS FOR ANGULAR WATCH
 app.use(express.static( __dirname + '/public/dist/public' ));
 
-app.get("/task", function(req,res){
+app.get("/tasks", function(req,res){
     RestTaskModel.find({}, function(err, tasks){
-        var info = tasks;
         res.json(tasks);
     })
 })
@@ -83,6 +82,6 @@ app.delete("/task/remove/:id", function(req,res){
 })
 
 
-app.listen(9000,function(){
+app.listen(8000,function(){
     console.log("****************PORT IS LISTENING")
 })
