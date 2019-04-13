@@ -12,8 +12,8 @@ var RestTaskSchema = new mongoose.Schema({
     description: {type: String},
     completed: {type: Boolean}
 }, {timestamps: true})
-mongoose.model("RestTaskModel", RestTaskSchema );
-var RestTaskModel = mongoose.model("RestTaskModel");
+
+var RestTaskModel = mongoose.model("RestTaskModel", RestTaskSchema);
 mongoose.Promise = global.Promise;
 
 var bodyParser = require("body-parser");
@@ -49,10 +49,10 @@ app.post("/task/new", function(req,res){
             console.log(req.body)
             console.log("**********Error with POST method USER CREATION");
             console.log(err);
-            res.redirect("/")
+            res.json(task);
         } else{
             console.log("**************** SUCCESSFULLY CREATED TASK")
-            res.redirect("/")
+            res.json(task);
         }
         
     })
@@ -63,10 +63,10 @@ app.put("/task/put/:id", function(req,res){
         if(err){
             console.log("**********Error with POST method USER CREATION");
             console.log(err);
-            res.redirect("/")
+            res.json(task);
         } else{
             console.log("**************** SUCCESSFULLY CREATED USER")
-            res.redirect("/")
+            res.json(task);
         }
         
     })
@@ -76,7 +76,7 @@ app.delete("/task/remove/:id", function(req,res){
     console.log(req.params.id)
     RestTaskModel.findByIdAndRemove({_id: req.params.id}, function(err){
         console.log("REMOVEEEEEDDDD")
-        res.redirect("/");
+        res.json(task);
     })
     
 })
