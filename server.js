@@ -27,6 +27,7 @@ app.use(express.static( __dirname + '/public/dist/public' ));
 
 app.get("/tasks", function(req,res){
     RestTaskModel.find({}, function(err, tasks){
+        console.log("********* ALL TASKS SERVER.JS")
         res.json(tasks);
     })
 })
@@ -59,6 +60,7 @@ app.post("/task/new", function(req,res){
 })
 
 app.put("/task/put/:id", function(req,res){
+    console.log(req.body )
     RestTaskModel.findByIdAndUpdate({_id: req.params.id},function(err){
         if(err){
             console.log("**********Error with POST method USER CREATION");
@@ -76,12 +78,12 @@ app.delete("/task/remove/:id", function(req,res){
     console.log(req.params.id)
     RestTaskModel.findByIdAndRemove({_id: req.params.id}, function(err){
         console.log("REMOVEEEEEDDDD")
-        res.json(task);
+        // res.json(task);
     })
     
 })
 
 
-app.listen(8000,function(){
+app.listen(9000,function(){
     console.log("****************PORT IS LISTENING")
 })
